@@ -1,0 +1,75 @@
+project: numcp
+id: numcp
+updated: 20260609::193954
+items:
+  - id: "1"
+    doob_uuid: null
+    name: null
+    priority: P1
+    status: open
+    title: "Phase 2: Nu executor (nu-mcp engine wrapper)"
+    description: |
+      Implement src/executor.rs — wraps nu-mcp to run handler.nu scripts with
+      $in = tool args, captures stdout as string. Requires adding nu-mcp dep
+      (rustc 1.93.1+). See docs/plans/2026-06-09-implementation.md P2-1.
+    files:
+      - src/executor.rs
+      - Cargo.toml
+    completed: null
+    extra: []
+  - id: "2"
+    doob_uuid: null
+    name: null
+    priority: P1
+    status: open
+    title: "Phase 3: MCP server (rmcp, initialize/tools/list/tools/call)"
+    description: |
+      Implement src/server.rs — MCP protocol over rmcp: initialize, tools/list,
+      tools/call with error mapping. Conformance test suite in
+      tests/conformance_mcp_server.rs. See P3-1.
+    files:
+      - src/server.rs
+      - tests/conformance_mcp_server.rs
+    completed: null
+    extra: []
+  - id: "3"
+    doob_uuid: null
+    name: null
+    priority: P2
+    status: open
+    title: "Phase 4: Warm-up routine"
+    description: |
+      Implement src/warm.rs — startup warm-up: load config, init Nu engine,
+      spawn numcp, report status JSON to stderr. See P4-1.
+    files:
+      - src/warm.rs
+    completed: null
+    extra: []
+  - id: "4"
+    doob_uuid: null
+    name: null
+    priority: P2
+    status: open
+    title: "Phase 5 & 6: Integration tests + fuzz CI"
+    description: |
+      Round-trip integration test (NUMCP_INTEGRATION=1 gate) and fuzz targets
+      for tool.toml parser and MCP tools/call message parser. See P5-1, P6-1.
+    files:
+      - tests/integration/round_trip.rs
+      - fuzz/fuzz_targets/fuzz_tool_toml.rs
+      - fuzz/fuzz_targets/fuzz_mcp_tools_call.rs
+    completed: null
+    extra: []
+log:
+  - date: 20260609::193954
+    summary: >-
+      Bootstrapped repo; implemented Phase 1 — config parsing and tool registry
+      with 12 unit tests green; published skeleton to GitHub
+    commits:
+      - sha: 53f5110
+        branch: main
+      - sha: 5547563
+        branch: main
+      - sha: 4ce4820
+        branch: main
+    session: 1
