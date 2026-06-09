@@ -1,0 +1,39 @@
+[package]
+name = "numcp"
+version = "0.1.0"
+edition = "2024"
+authors = ["Joseph O'Brien <89jobrien@users.noreply.github.com>"]
+license = "MIT OR Apache-2.0"
+description = "MCP server that exposes Nushell tool handlers as MCP tools"
+repository = "https://github.com/89jobrien/numcp"
+keywords = ["mcp", "nushell", "nu", "llm", "agent"]
+categories = ["command-line-utilities", "development-tools"]
+
+[[bin]]
+name = "numcp"
+path = "src/main.rs"
+
+[dependencies]
+# MCP protocol — official Rust SDK
+rmcp = { version = "1", features = ["server", "macros"] }
+
+# Nu engine for executing Nu tool handlers
+nu-mcp = "0.113"
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Config file
+toml = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Error handling
+anyhow = "1"
+thiserror = "2"
+
+[dev-dependencies]
+proptest = "1"
