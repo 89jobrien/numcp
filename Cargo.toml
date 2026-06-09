@@ -18,7 +18,7 @@ path = "src/main.rs"
 rmcp = { version = "1", features = ["server", "macros"] }
 
 # Nu engine for executing Nu tool handlers
-nu-mcp = "0.113"
+# nu-mcp = "0.113"   # added in P2-1 (executor); requires rustc 1.93.1+
 
 # CLI
 clap = { version = "4", features = ["derive"] }
