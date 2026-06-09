@@ -1,3 +1,7 @@
+mod config;
+mod error;
+mod registry;
+
 use anyhow::Result;
 use clap::{Parser, Subcommand};
 
