@@ -9,16 +9,19 @@ repository = "https://github.com/89jobrien/numcp"
 keywords = ["mcp", "nushell", "nu", "llm", "agent"]
 categories = ["command-line-utilities", "development-tools"]
 
+[lib]
+name = "numcp"
+path = "src/lib.rs"
+
 [[bin]]
 name = "numcp"
 path = "src/main.rs"
 
 [dependencies]
 # MCP protocol — official Rust SDK
-rmcp = { version = "1", features = ["server", "macros"] }
+rmcp = { version = "1", features = ["server", "macros", "client", "transport-child-process"] }
 
 # Nu engine for executing Nu tool handlers
-# nu-mcp = "0.113"   # added in P2-1 (executor); requires rustc 1.93.1+
 
 # CLI
 clap = { version = "4", features = ["derive"] }
@@ -35,6 +38,17 @@ indexmap = { version = "2", features = ["serde"] }
 # Error handling
 anyhow = "1"
 thiserror = "2"
+nu-mcp = "0.113.1"
+nu-engine = "0.113.1"
+nu-parser = "0.113.1"
+nu-protocol = "0.113.1"
+nu-cmd-lang = "0.113.1"
+nuon = "0.113.1"
+nu-command = "0.113.1"
+
+[[test]]
+name = "round_trip"
+path = "tests/integration/round_trip.rs"
 
 [dev-dependencies]
 proptest = "1"

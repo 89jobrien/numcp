@@ -14,6 +14,9 @@ pub enum Error {
     #[error("tool not found: `{0}`")]
     ToolNotFound(String),
 
+    #[error("nu execution error: {0}")]
+    Execution(String),
+
     #[error(transparent)]
     Io(#[from] std::io::Error),
 }

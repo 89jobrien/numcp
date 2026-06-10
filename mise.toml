@@ -1,0 +1,41 @@
+[tools]
+rust = "stable"
+"cargo:cargo-nextest" = "latest"
+"cargo:cargo-fuzz" = "latest"
+
+[tasks.build]
+description = "Build the project"
+run = "cargo build"
+
+[tasks.test]
+description = "Run all unit tests"
+run = "cargo nextest run"
+
+[tasks.lint]
+description = "Clippy with warnings as errors"
+run = "cargo clippy -- -D warnings"
+
+[tasks.fmt]
+description = "Format check"
+run = "cargo fmt --check"
+
+[tasks.ci]
+description = "Full CI gate (fmt + clippy + test)"
+run = [
+    "cargo fmt --check",
+    "cargo clippy -- -D warnings",
+    "cargo nextest run",
+]
+
+[tasks.integration]
+description = "Integration round-trip test (requires numcp serve to be working)"
+env = { NUMCP_INTEGRATION = "1" }
+run = "cargo test --test round_trip"
+
+[tasks.fuzz-toml]
+description = "Fuzz the tool.toml parser (30s, requires nightly)"
+run = "cargo +nightly fuzz run fuzz_tool_toml -- -max_total_time=30"
+
+[tasks.fuzz-call]
+description = "Fuzz the tools/call handler (30s, requires nightly)"
+run = "cargo +nightly fuzz run fuzz_mcp_tools_call -- -max_total_time=30"

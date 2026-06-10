@@ -49,8 +49,7 @@ impl ToolRegistry {
     }
 
     /// Load from a `Config` without validating handler paths exist.
-    /// Useful in tests where handler files are not on disk.
-    #[cfg(test)]
+    /// Useful in tests and fuzz targets where handler files are not on disk.
     pub fn load_unchecked(config: &Config, base_dir: &Path) -> Self {
         let mut tools = IndexMap::new();
         for tool in &config.tools {
@@ -69,7 +68,7 @@ impl ToolRegistry {
 
     /// Return all tools as MCP `tools/list` schema entries.
     pub fn list(&self) -> Vec<Value> {
-        self.tools.values().map(|t| tool_to_mcp_schema(t)).collect()
+        self.tools.values().map(tool_to_mcp_schema).collect()
     }
 
     /// Look up a tool by name.

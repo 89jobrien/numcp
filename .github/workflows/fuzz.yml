@@ -1,0 +1,35 @@
+name: Fuzz
+
+on:
+  schedule:
+    - cron: "0 3 * * 1" # weekly, Monday 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  fuzz:
+    name: Fuzz targets (30s each)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install nightly toolchain
+        uses: dtolnay/rust-toolchain@nightly
+
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz
+
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: fuzz-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Fuzz fuzz_tool_toml
+        run: cargo +nightly fuzz run fuzz_tool_toml -- -max_total_time=30
+        working-directory: fuzz
+
+      - name: Fuzz fuzz_mcp_tools_call
+        run: cargo +nightly fuzz run fuzz_mcp_tools_call -- -max_total_time=30
+        working-directory: fuzz

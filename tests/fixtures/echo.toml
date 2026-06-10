@@ -1,0 +1,9 @@
+[[tool]]
+name        = "echo"
+description = "Echo the input back as NUON"
+handler     = "echo.nu"
+
+[tool.parameters.msg]
+type        = "string"
+description = "Message to echo"
+required    = false

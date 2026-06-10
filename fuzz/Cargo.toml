@@ -1,0 +1,30 @@
+[package]
+name = "numcp-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+
+[dependencies.numcp]
+path = ".."
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "fuzz_tool_toml"
+path = "fuzz_targets/fuzz_tool_toml.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "fuzz_mcp_tools_call"
+path = "fuzz_targets/fuzz_mcp_tools_call.rs"
+test = false
+doc = false

@@ -1,0 +1,4 @@
+[[tool]]
+name = "echo"
+description = "echo"
+handler = "echo.nu"
