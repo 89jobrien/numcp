@@ -35,7 +35,7 @@ async fn full_round_trip_echo_tool() {
         .current_dir(fixtures_dir());
     let transport = TokioChildProcess::new(cmd).expect("failed to spawn numcp");
 
-    let mut client = ().serve(transport).await.expect("client handshake failed");
+    let client = ().serve(transport).await.expect("client handshake failed");
 
     // tools/list — echo must be present
     let list = client
