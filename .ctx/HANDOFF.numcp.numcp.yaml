@@ -1,6 +1,6 @@
 project: numcp
 id: numcp
-updated: 20260609::193954
+updated: 2026-06-09
 items:
   - id: "1"
     doob_uuid: null
@@ -62,14 +62,6 @@ items:
     extra: []
 log:
   - date: 20260609::193954
-    summary: >-
-      Bootstrapped repo; implemented Phase 1 — config parsing and tool registry
-      with 12 unit tests green; published skeleton to GitHub
-    commits:
-      - sha: 53f5110
-        branch: main
-      - sha: 5547563
-        branch: main
-      - sha: 4ce4820
-        branch: main
+    summary: Bootstrapped repo; implemented Phase 1 — config parsing and tool registry with 12 unit tests green; published skeleton to GitHub
+    commits: []
     session: 1
